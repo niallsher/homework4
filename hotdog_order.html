@@ -1,0 +1,161 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name='viewport' content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+<title>Joes Hotdogs</title>
+<style type ="text/css">
+	
+	
+
+
+</style>
+</head>
+
+<body>
+
+	<div>
+		<div id='menu'>
+
+			<div class='content'>
+				<div id='items'>
+					<p>Hotdogs</p>
+					<p>French Fries</p>
+					<p>Drinks</p>
+				</div>
+			</div>
+
+			<div class='content'>
+				<div id='price'>
+					<p>$3.25</p>
+					<p>$2.00</p>
+					<p>$1.50</p>
+				</div>
+			</div>
+		</div>
+
+		<br clear='all'>
+
+
+		<div id='prompt'>
+
+			<a href="#" id="order-button" onclick="OrderFunc()">Order Now</a>
+
+		</div>
+
+		<div id='output_chart'>
+
+			<div class='order'>
+				<div id='left_col'>
+					<p id='HotdogsL'>Hotdogs</p>
+					<p id='FriesL'>French Fries</p>
+					<p id='DrinksL'>Drinks</p>
+					<p id='SubtotalL'>Subtotal</p>
+					<p id='DiscountL'>Discount</p>
+					<p id='TaxL'>Tax</p>
+					<p id='TotalL'>Total</p>
+				</div>
+			</div>
+
+			<div class='order'>
+				<div id='right_col'>
+					<p id='hotdogs'></p>
+					<p id='fries'></p>
+					<p id='drinks'></p>
+					<p id='subtotal'></p>
+					<p id='discountR'></p>
+					<p id='tax'></p>
+					<p id='total'></p>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script language="javascript">
+
+		function OrderFunc() {
+
+			var Hotdog_num = prompt("How many Hotdogs would you like:");
+			var Fries_num = prompt("How many French Fries would you like: (20 count)");
+			var Drinks_num = prompt("How many Drinks would you like:");
+
+			if ((Hotdog_num == null || Hotdog_num == 0) 
+				&& (Fries_num == null || Fries_num == 0) 
+				&& (Drinks_num == null || Drinks_num == 0)) {
+
+				document.getElementById('output_chart').style.display = "none";
+				alert("Order Failed: Insufficient Quantity");
+			} else {
+
+				document.getElementById('output_chart').style.display = "block";
+
+				if (Hotdog_num != null && Hotdog_num != 0) {
+					document.getElementById('HotdogsL').style.display = "block";
+					document.getElementById('hotdogs').style.display = "block";
+
+
+					document.getElementById('hotdogs').innerHTML = Hotdog_num;
+				} else {
+					Hotdog_num = 0;
+					// document.getElementById('HotdogsL').style.display = "none";
+
+				}
+
+				if (Fries_num != null && Fries_num != 0) {
+					document.getElementById('FriesL').style.display = "block";
+					document.getElementById('fries').style.display = "block";
+
+
+					document.getElementById('fries').innerHTML = Fries_num;
+				} else {
+					Fries_num = 0;
+					// document.getElementById('FriesL').style.display = "none";
+
+				}
+
+				if (Drinks_num != null && Drinks_num != 0) {
+					document.getElementById('DrinksL').style.display = "block";
+					document.getElementById('drinks').style.display = "block";
+
+
+					document.getElementById('drinks').innerHTML = Drinks_num;
+				} else {
+					Drinks_num = 0;
+					// document.getElementById('DrinksL').style.display = "none";
+				}
+
+				var subtotal, tax, total;
+
+				subtotal = (Hotdog_num * 3.25) + (Fries_num * 2.00) + (Drinks_num * 1.50);
+
+				if (subtotal >= 20) {
+					var discount = (subtotal * .1);
+					discount1 = discount.toFixed(2);
+					subtotal = subtotal - discount;
+					document.getElementById('DiscountL').style.display = "block";
+					document.getElementById('discountR').style.display = "block";
+					document.getElementById('discountR').innerHTML = "$" + discount1;
+				}
+
+				subtotal1 = subtotal.toFixed(2);
+
+				tax = (subtotal * .0625);
+
+				tax1 = tax.toFixed(2);
+
+				total = subtotal + tax;
+
+				document.getElementById('subtotal').innerHTML = "$" + subtotal1;
+				document.getElementById('tax').innerHTML = "$" + tax1;
+				document.getElementById('total').innerHTML = "$" + total.toFixed(2);
+			}
+
+		}
+	
+
+	</script>
+
+</body>
+
+</html>
