@@ -1,0 +1,273 @@
+<!doctype html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name='viewport' content="width=device-width, initial-scale=1">
+<link type="text/css" rel="stylesheet" href="stylesheet.css"/>
+<title>Joes Hotdogs</title>
+<style type ="text/css">
+	
+	
+
+</style>
+</head>
+
+<body>
+	<div id='title_bar'>
+		<h1>Joe's Hotdog Stand</h1>
+		<!-- <div id='nav'>
+			<ul>
+				<li class='active'><a href='site_home.html'>Home</a></li>
+				<li><a href='site_about.html'>About</a></li>
+				<li><a href='site_contact.html'>Contact</a></li>
+
+			</ul>
+		</div> -->
+	</div>
+	<div style="position: relative; margin-top: 80px; height: 600px">
+		<h3>
+			Order off of our classic menu for the best hotdogs in the city!
+		</h3>
+		<div id='menu'>
+			<div class='content'>
+				<div id='items'>
+					<p>Hotdogs</p>
+					<p id='a'>French Fries</p>
+					<p id='b'>Fries</p>
+					<p>Drinks</p>
+				</div>
+			</div>
+
+			<div class='content'>
+				<div id='price'>
+					<p>$3.25</p>
+					<p>$2.00</p>
+					<p>$1.50</p>
+				</div>
+			</div>
+
+		</div>
+		<p style="text-align: center; margin: 0;">
+			<EM><SUP>*</SUP>Get Joe's Special Bundle Discount on all orders $20 or more!!
+		</EM></p>
+
+		<br clear='all'>
+
+
+		<div id='prompt'>
+
+			<a href="#" id="order-button" onclick="OrderFunc()">Order Now</a>
+
+		</div>
+
+		<h3 id='order_title'>
+			Your Order:
+		</h3>
+		<div id='output_chart'>
+			<div class='order'>
+				<div id='left_col'>
+					<p id='HotdogsL'>Hotdogs</p>
+					<p id='FriesL'>French Fries</p>
+					<p id='DrinksL'>Drinks</p>
+					<p id='SubtotalL'>Subtotal</p>
+					<p id='DiscountL'>Discount</p>
+					<p id='TaxL'>Tax</p>
+					<p id='TotalL'>Total</p>
+				</div>
+			</div>
+
+			<div class='order'>
+				<div id='right_col'>
+					<p id='hotdogs'></p>
+					<p id='fries'></p>
+					<p id='drinks'></p>
+					<p id='subtotal'></p>
+					<p id='discountR'></p>
+					<p id='tax'></p>
+					<p id='total'></p>
+				</div>
+			</div>
+
+			<!-- <div id='prompt2'>
+
+				<a href="#" id="re-order-button" onclick="OrderFunc()">Edit Order</a>
+
+			</div> -->
+		</div>
+		<div id='prompt2'>
+
+			<a href="#" id="re-order-button" onclick="OrderFunc()">Edit Order</a>
+			<a href="#" id="submit" onclick="ClearFunc()">Submit Order</a>
+		</div>
+	</div>
+
+
+
+	<script language="javascript">
+
+		function OrderFunc() {
+
+			var Hotdog_num = prompt("How many Hotdogs would you like:");
+			var Fries_num = prompt("How many French Fries would you like: (20 count)");
+			var Drinks_num = prompt("How many Drinks would you like:");
+
+
+			ClearFunc();
+
+			// document.getElementById('DrinksL').style.display = "none";
+			// document.getElementById('drinks').style.display = "none";
+
+			// document.getElementById('FriesL').style.display = "none";
+			// document.getElementById('fries').style.display = "none";
+
+			// document.getElementById('HotdogsL').style.display = "none";
+			// document.getElementById('hotdogs').style.display = "none";
+
+			// document.getElementById('DiscountL').style.display = "none";
+			// document.getElementById('discountR').style.display = "none";
+
+			if ((Hotdog_num == null || Hotdog_num == 0) 
+				&& (Fries_num == null || Fries_num == 0) 
+				&& (Drinks_num == null || Drinks_num == 0)) {
+
+				// document.getElementById('order_title').style.display = "none";
+				// document.getElementById('output_chart').style.display = "none";
+				alert("Order Failed: Insufficient Quantity");
+			} else {
+				document.getElementById('order_title').style.display = "block";
+				document.getElementById('output_chart').style.display = "block";
+
+				if (Hotdog_num != null && Hotdog_num != 0) {
+					document.getElementById('HotdogsL').style.display = "block";
+					document.getElementById('hotdogs').style.display = "block";
+
+
+					document.getElementById('hotdogs').innerHTML = Hotdog_num;
+				} else {
+					Hotdog_num = 0;
+					// document.getElementById('HotdogsL').style.display = "none";
+
+				}
+
+				if (Fries_num != null && Fries_num != 0) {
+					document.getElementById('FriesL').style.display = "block";
+					document.getElementById('fries').style.display = "block";
+
+
+					document.getElementById('fries').innerHTML = Fries_num;
+				} else {
+					Fries_num = 0;
+					// document.getElementById('FriesL').style.display = "none";
+
+				}
+
+				if (Drinks_num != null && Drinks_num != 0) {
+					document.getElementById('DrinksL').style.display = "block";
+					document.getElementById('drinks').style.display = "block";
+
+
+					document.getElementById('drinks').innerHTML = Drinks_num;
+				} else {
+					Drinks_num = 0;
+					// document.getElementById('DrinksL').style.display = "none";
+				}
+
+				var subtotal, tax, total, subtotalFIX, taxFIX, totalFIX;
+
+				subtotal = (Hotdog_num * 3.25) + (Fries_num * 2.00) + (Drinks_num * 1.50);
+
+				// subtotal1 = subtotal.toFixed(2);
+				// subtotal2 = subtotal1;
+				
+				if (subtotal >= 20) {
+
+					var discount = (subtotal * .1);
+					// discount = discount.toFixed(2);
+					// discount = subtotal - discountFIX;
+					// subtotal = subtotal.toFixed(2);
+
+					tax = ((subtotal - discount) * .0625);
+
+					// tax = tax.toFixed(2);
+
+					total = (subtotal - discount) + tax;
+					// total = total.toFixed(2);
+
+					document.getElementById('DiscountL').style.display = "block";
+					document.getElementById('discountR').style.display = "block";
+
+					discountFIX = discount.toFixed(2);
+					subtotalFIX = subtotal.toFixed(2);
+					taxFIX = tax.toFixed(2);
+					totalFIX = total.toFixed(2);
+
+
+					document.getElementById('discountR').innerHTML = "$" + discountFIX;
+				
+					document.getElementById('subtotal').innerHTML = "$" + subtotalFIX;
+					document.getElementById('tax').innerHTML = "$" + taxFIX;
+					document.getElementById('total').innerHTML = "$" + totalFIX;
+				} else {
+
+					tax = subtotal * .0625;
+					total = subtotal + tax;
+
+					subtotalFIX = subtotal.toFixed(2);
+					taxFIX = tax.toFixed(2);
+					totalFIX = total.toFixed(2);
+
+					// document.getElementById('DiscountL').style.display = "none";
+					// document.getElementById('discountR').style.display = "none";
+					document.getElementById('subtotal').innerHTML = "$" + subtotalFIX;
+					document.getElementById('tax').innerHTML = "$" + taxFIX;
+					document.getElementById('total').innerHTML = "$" + totalFIX;
+					// var subtotal3 = subtotal1;
+
+					// tax3 = (subtotal3 * .0625);
+
+					// var tax4 = tax3.toFixed(2);
+
+					// total3 = subtotal3 + tax4;
+					// var total4 = total3.toFixed(2);
+
+					// document.getElementById('subtotal').innerHTML = "$" + subtotal3;
+					// document.getElementById('tax').innerHTML = "$" + tax4;
+					// document.getElementById('total').innerHTML = "$" + total4;
+				}
+				// document.getElementById('re-order-button').style.display = "inline";
+
+				// document.getElementById('submit').style.display = "inline";
+
+				document.getElementById('prompt2').style.display = "block";
+
+			}
+
+		}
+
+		function ClearFunc() {
+
+			document.getElementById('DrinksL').style.display = "none";
+			document.getElementById('drinks').style.display = "none";
+
+			document.getElementById('FriesL').style.display = "none";
+			document.getElementById('fries').style.display = "none";
+
+			document.getElementById('HotdogsL').style.display = "none";
+			document.getElementById('hotdogs').style.display = "none";
+
+			document.getElementById('DiscountL').style.display = "none";
+			document.getElementById('discountR').style.display = "none";
+
+			document.getElementById('order_title').style.display = "none";
+			document.getElementById('output_chart').style.display = "none";
+
+			document.getElementById('prompt2').style.display = "none";
+
+		}
+	
+
+	</script>
+
+</body>
+
+</html>
